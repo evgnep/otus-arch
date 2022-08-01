@@ -1,0 +1,5 @@
+server:
+  port: 8091
+
+appl:
+  groupid: group2
