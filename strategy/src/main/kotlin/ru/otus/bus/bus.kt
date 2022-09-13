@@ -25,10 +25,18 @@ class SomeObject(private val publisher: ApplicationEventPublisher) {
 }
 
 @Component
-class Listener {
+class ListenerA {
     @EventListener
     fun handleContextStart(cse: CustomEvent) {
         log.info { "SubscriberA: ${cse.source.state}" }
+    }
+}
+
+@Component
+class ListenerB {
+    @EventListener
+    fun handleContextStart(cse: CustomEvent) {
+        log.info { "SubscriberB: ${cse.source.state}" }
     }
 }
 

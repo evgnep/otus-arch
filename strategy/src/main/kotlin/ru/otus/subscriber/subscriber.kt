@@ -23,12 +23,19 @@ class SomeObject {
 
 fun main() {
     val obj = SomeObject()
+    var counter = 0
 
     obj.doSomething()
 
     obj.attach {
         log.info { "SubscriberA: ${it.state}" }
         //it.attach { log.info { "SubscriberInner: ${it.state}" } }
+        /*if (counter++ == 0)
+            it.doSomething(); */
+    }
+
+    obj.attach {
+        log.info { "SubscriberB: ${it.state}" }
     }
 
     obj.doSomething()

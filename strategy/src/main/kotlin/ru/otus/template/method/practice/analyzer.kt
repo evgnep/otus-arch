@@ -63,6 +63,10 @@ class CounterAnalyzer : BaseLogAnalyzer() {
     override fun process(line: LogLine) {
         if (line.level == "ERROR") count_ += 1
     }
+
+    override fun onError(line: String) {
+        println(line)
+    }
 }
 
 fun main() {
