@@ -4,42 +4,31 @@ interface GameObject {
     fun visit(visitor: GameObjectVisitor)
 }
 
-interface GameObjectVisitor
+interface GameObjectVisitor {
+    fun visitTank(tank: Tank) {}
+    fun visitDot(dot: Dot) {}
 
-interface TankVisitor: GameObjectVisitor {
-    fun visitTank(tank: Tank)
+    // fun visitSoldier(soldier: Soldier) {}
 }
-
-interface DotVisitor: GameObjectVisitor {
-    fun visitDot(dot: Dot)
-}
-
-interface SoldierVisitor: GameObjectVisitor {
-    fun visitSoldier(soldier: Soldier)
-}
-
 class Tank(val damage: Int, val mileage: Int): GameObject {
     override fun visit(visitor: GameObjectVisitor) {
-        if (visitor is TankVisitor)
-            visitor.visitTank(this)
+        visitor.visitTank(this)
     }
 }
 
 class Dot(val damage: Int): GameObject {
     override fun visit(visitor: GameObjectVisitor) {
-        if (visitor is DotVisitor)
-            visitor.visitDot(this)
+        visitor.visitDot(this)
     }
 }
 
-class Soldier(val damage: Int): GameObject {
-    override fun visit(visitor: GameObjectVisitor) {
-        if (visitor is SoldierVisitor)
-            visitor.visitSoldier(this)
-    }
-}
+//class Soldier(val damage: Int): GameObject {
+//    override fun visit(visitor: GameObjectVisitor) {
+//        visitor.visitSoldier(this)
+//    }
+//}
 
-class DamageFinder: TankVisitor, DotVisitor {
+class DamageFinder: GameObjectVisitor {
     var max = 0
     override fun visitTank(tank: Tank) {
         max = Math.max(max, tank.damage)
